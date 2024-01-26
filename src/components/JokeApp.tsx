@@ -4,26 +4,33 @@ import JokeDisplay from './JokeDisplay';
 import './JokeApp.css';
 
 const JokeApp: React.FC = () => {
-  const [joke, setJoke] = useState('');
+  const [jokes, setJokes] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchJoke();
+    fetchJokes();
   }, []);
 
-  const fetchJoke = async () => {
+  const fetchJokes = async () => {
     try {
-      const response = await fetch('https://api.chucknorris.io/jokes/random');
-      const data = await response.json();
-      setJoke(data.value);
+      const jokePromises = Array.from({ length: 5 }, () =>
+        fetch('https://api.chucknorris.io/jokes/random').then((response) => response.json())
+      );
+
+      const jokeResponses = await Promise.all(jokePromises);
+      const newJokes = jokeResponses.map((joke) => joke.value);
+      setJokes(newJokes);
     } catch (error) {
-      console.error('Error fetching joke:', error);
+      console.error('Error fetching jokes:', error);
     }
   };
 
   return (
     <div className='joke-app'>
-      <JokeDisplay joke={joke} />
-      <JokeButton fetchJoke={fetchJoke} />
+      <JokeButton fetchJokes={fetchJokes} />
+      <h2 className='joke-title'>Шутки Чака Норриса:</h2>
+      {jokes.map((joke, index) => (
+        <JokeDisplay key={index} joke={joke} />
+      ))}      
     </div>
   );
 };

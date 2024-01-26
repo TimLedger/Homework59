@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface JokeButtonProps {
-  fetchJoke: () => void;
+  fetchJokes: () => void;
 }
 
-const JokeButton: React.FC<JokeButtonProps> = ({ fetchJoke }) => {
+const JokeButton: React.FC<JokeButtonProps> = ({ fetchJokes }) => {
   const handleClick = () => {
-    fetchJoke();
+    fetchJokes();
   };
 
   return (
     <button onClick={handleClick} className="joke-button">
-      Новая шутка
+      Новые шутки
     </button>
   );
 };
