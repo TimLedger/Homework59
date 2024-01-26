@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MovieItem from './MovieItem';
 import './MovieApp.css';
 
-const App: React.FC = () => {
+const MovieApp: React.FC = () => {
   const [movies, setMovies] = useState<{ id: number; text: string }[]>([]);
   const [newMovie, setNewMovie] = useState('');
 
@@ -66,4 +66,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default MovieApp;
