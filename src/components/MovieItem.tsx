@@ -21,19 +21,20 @@ const MovieItem: React.FC<MovieItemProps> = ({ id, text, onUpdate, onDelete }) =
   };
 
   return (
-    <div>
+    <div className='movie-item'>
       {editing ? (
         <>
           <input
             type="text"
             value={editedText}
             onChange={(e) => setEditedText(e.target.value)}
+            className='item-input'
           />
           <button onClick={handleUpdate}>Сохранить</button>
         </>
       ) : (
         <>
-          <span onClick={() => setEditing(true)} style={{ cursor: 'pointer' }}>
+          <span className='item-name' onClick={() => setEditing(true)} style={{ cursor: 'pointer' }}>
             {text}
           </span>
         </>

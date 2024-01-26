@@ -39,23 +39,29 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={newMovie}
-        onChange={(e) => setNewMovie(e.target.value)}
-        placeholder="Введите фильм"
-      />
-      <button onClick={addMovie}>Добавить</button>
-      {movies.map((movie) => (
-        <MovieItem
-          key={movie.id}
-          id={movie.id}
-          text={movie.text}
-          onUpdate={updateMovie}
-          onDelete={deleteMovie}
-        />
-      ))}
+    <div className='movie-app'>
+        <div className='movie-header'>
+            <input
+                type="text"
+                value={newMovie}
+                onChange={(e) => setNewMovie(e.target.value)}
+                placeholder="Введите фильм"
+                className='movie-input'
+            />
+            <button onClick={addMovie}>Добавить</button>
+        </div>
+        <div className='movie-list'>
+            <h2 className='movie-title'>Список фильмов:</h2>
+            {movies.map((movie) => (
+                <MovieItem
+                key={movie.id}
+                id={movie.id}
+                text={movie.text}
+                onUpdate={updateMovie}
+                onDelete={deleteMovie}
+                />
+            ))}
+        </div>
     </div>
   );
 };
